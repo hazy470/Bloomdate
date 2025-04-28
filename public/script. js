@@ -1,40 +1,64 @@
-function goToPage(pageId) {
-  const pages = document.querySelectorAll('.page');
+const pages = document.querySelectorAll('.page');
+
+function showPage(pageId) {
   pages.forEach(page => {
     page.classList.remove('active');
   });
   document.getElementById(pageId).classList.add('active');
 }
 
-// Demo swipe profiles
+function signup(event) {
+  event.preventDefault();
+  alert("Account created successfully!");
+  showPage('swipe');
+}
+
+function login(event) {
+  event.preventDefault();
+  alert("Logged in successfully!");
+  showPage('swipe');
+}
+
+function logout() {
+  alert("Logged out!");
+  showPage('home');
+}
+
+// Demo profiles
 const profiles = [
-  { name: 'Anna, 24', info: 'Loves art and travel.' },
-  { name: 'Sophia, 27', info: 'Dog lover and foodie.' },
-  { name: 'Mia, 23', info: 'Enjoys fitness and movies.' }
+  { name: "Anna", age: 24, interests: "Hiking, Movies", img: "https://i.pravatar.cc/150?img=1" },
+  { name: "John", age: 28, interests: "Traveling, Cooking", img: "https://i.pravatar.cc/150?img=2" },
+  { name: "Mia", age: 22, interests: "Reading, Swimming", img: "https://i.pravatar.cc/150?img=3" }
 ];
 
 let currentProfile = 0;
 
-function showProfile() {
-  if (currentProfile < profiles.length) {
-    document.getElementById('profile-name').textContent = profiles[currentProfile].name;
-    document.getElementById('profile-info').textContent = profiles[currentProfile].info;
-  } else {
-    document.getElementById('profile-name').textContent = 'No more profiles!';
-    document.getElementById('profile-info').textContent = '';
+function loadProfile() {
+  const container = document.getElementById('card-container');
+  if (currentProfile >= profiles.length) {
+    container.innerHTML = "<p>No more profiles!</p>";
+    return;
   }
+  const profile = profiles[currentProfile];
+  container.innerHTML = `
+    <div class="card">
+      <img src="${profile.img}" alt="${profile.name}" style="width:100%;border-radius:10px;">
+      <h3>${profile.name}, ${profile.age}</h3>
+      <p>${profile.interests}</p>
+    </div>
+  `;
 }
 
 function like() {
   alert(`You liked ${profiles[currentProfile].name}!`);
   currentProfile++;
-  showProfile();
+  loadProfile();
 }
 
 function dislike() {
   currentProfile++;
-  showProfile();
+  loadProfile();
 }
 
-// Load the first profile
-showProfile();
+// Load first profile
+loadProfile();
