@@ -1,0 +1,26 @@
+body {
+  background-color: #121212;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  padding-bottom: 80px;
+}
+
+.bottom-menu {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #1f1f1f;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.bottom-menu a {
+  color: #aaa;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.bottom-menu a.active {
+  color: #ff4da6;
+}
