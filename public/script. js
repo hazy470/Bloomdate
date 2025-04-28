@@ -1,0 +1,40 @@
+function goToPage(pageId) {
+  const pages = document.querySelectorAll('.page');
+  pages.forEach(page => {
+    page.classList.remove('active');
+  });
+  document.getElementById(pageId).classList.add('active');
+}
+
+// Demo swipe profiles
+const profiles = [
+  { name: 'Anna, 24', info: 'Loves art and travel.' },
+  { name: 'Sophia, 27', info: 'Dog lover and foodie.' },
+  { name: 'Mia, 23', info: 'Enjoys fitness and movies.' }
+];
+
+let currentProfile = 0;
+
+function showProfile() {
+  if (currentProfile < profiles.length) {
+    document.getElementById('profile-name').textContent = profiles[currentProfile].name;
+    document.getElementById('profile-info').textContent = profiles[currentProfile].info;
+  } else {
+    document.getElementById('profile-name').textContent = 'No more profiles!';
+    document.getElementById('profile-info').textContent = '';
+  }
+}
+
+function like() {
+  alert(`You liked ${profiles[currentProfile].name}!`);
+  currentProfile++;
+  showProfile();
+}
+
+function dislike() {
+  currentProfile++;
+  showProfile();
+}
+
+// Load the first profile
+showProfile();
