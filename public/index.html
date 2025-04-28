@@ -2,192 +2,60 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BloomDate</title>
-  <style>
-    body {
-      background-color: #121212;
-      color: #fff;
-      font-family: 'Arial', sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-    header {
-      background-color: #1f1f1f;
-      padding: 1rem;
-      text-align: center;
-      font-size: 1.5rem;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-    header img {
-      width: 30px;
-      height: 30px;
-    }
-    main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
-      text-align: center;
-    }
-    #profile img {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      margin-bottom: 1rem;
-      object-fit: cover;
-      border: 2px solid #ff4081;
-    }
-    button {
-      background-color: #ff4081;
-      color: white;
-      border: none;
-      padding: 0.8rem 1.5rem;
-      margin: 0.5rem;
-      border-radius: 30px;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-    nav {
-      background-color: #1f1f1f;
-      display: flex;
-      justify-content: space-around;
-      padding: 0.5rem 0;
-      position: sticky;
-      bottom: 0;
-      width: 100%;
-    }
-    nav button {
-      background: none;
-      color: #fff;
-      font-size: 1rem;
-      border: none;
-      flex: 1;
-    }
-    form {
-      margin-top: 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      width: 80%;
-    }
-    input, select {
-      padding: 0.7rem;
-      border-radius: 5px;
-      border: none;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header>
-  <img src="images/flower.png" alt="Bloom">
-  BloomDate
-</header>
+  <header class="header">
+    <h1>BloomDate <span class="flower">✿</span></h1>
+  </header>
 
-<main id="main-content">
+  <main id="main-content">
+    <section id="home-page" class="page active">
+      <h2>Welcome to BloomDate!</h2>
+      <p>Find your match today!</p>
+      <button onclick="goToPage('swipe-page')">Start Swiping</button>
+    </section>
 
-  <div id="signup">
-    <h2>Sign Up</h2>
-    <form id="signupForm">
-      <input type="text" id="name" placeholder="Your name" required>
-      <input type="text" id="age" placeholder="Your age" required>
-      <input type="text" id="interests" placeholder="Your interests" required>
-      <select id="lookingFor" required>
-        <option value="">Looking for...</option>
-        <option value="Men">Men</option>
-        <option value="Women">Women</option>
-        <option value="Any">Any</option>
-      </select>
-      <button type="submit">Start Dating</button>
-    </form>
-  </div>
+    <section id="swipe-page" class="page">
+      <h2>Swipe Profiles</h2>
+      <div id="profile-card">
+        <h3 id="profile-name">Loading...</h3>
+        <p id="profile-info"></p>
+        <div class="swipe-buttons">
+          <button class="dislike" onclick="dislike()">❌</button>
+          <button class="like" onclick="like()">❤️</button>
+        </div>
+      </div>
+    </section>
 
-  <div id="profile" style="display:none;">
-    <!-- User profiles will appear here -->
-  </div>
+    <section id="messages-page" class="page">
+      <h2>Messages</h2>
+      <p>No messages yet...</p>
+    </section>
 
-  <div id="swipe-buttons" style="display:none;">
-    <button onclick="likeUser()">Like</button>
-    <button onclick="nextUser()">Skip</button>
-  </div>
+    <section id="settings-page" class="page">
+      <h2>Settings</h2>
+      <form>
+        <label>Username:</label><br>
+        <input type="text" placeholder="Your username"><br><br>
+        <label>Interests:</label><br>
+        <input type="text" placeholder="Your interests"><br><br>
+        <button type="submit">Save</button>
+      </form>
+    </section>
+  </main>
 
-</main>
+  <nav class="bottom-menu">
+    <button onclick="goToPage('home-page')">🏠<br>Home</button>
+    <button onclick="goToPage('swipe-page')">❤️<br>Swipe</button>
+    <button onclick="goToPage('messages-page')">💬<br>Messages</button>
+    <button onclick="goToPage('settings-page')">⚙️<br>Settings</button>
+  </nav>
 
-<nav>
-  <button onclick="showSwipe()">Swipe</button>
-  <button onclick="showSettings()">Settings</button>
-</nav>
-
-<script>
-// Dummy list of users to swipe
-const users = [
-  { name: "Alice", img: "images/user1.jpg" },
-  { name: "Bob", img: "images/user2.jpg" },
-  { name: "Charlie", img: "images/user3.jpg" }
-];
-
-let currentIndex = 0;
-let loggedIn = false;
-
-function showUser(index) {
-  const user = users[index];
-  if (!user) {
-    document.getElementById('profile').innerHTML = "<h2>No more users</h2>";
-    return;
-  }
-  document.getElementById('profile').innerHTML = `
-    <img src="${user.img}" alt="${user.name}">
-    <h2>${user.name}</h2>
-  `;
-}
-
-function likeUser() {
-  fetch('/like', { method: 'POST' }).then(() => {
-    alert("You liked " + users[currentIndex].name);
-    matchUser();
-    nextUser();
-  });
-}
-
-function matchUser() {
-  fetch('/match', { method: 'POST' }).then(() => {
-    alert("It's a match with " + users[currentIndex].name + "!");
-  });
-}
-
-function nextUser() {
-  currentIndex++;
-  showUser(currentIndex);
-}
-
-function showSwipe() {
-  document.getElementById('signup').style.display = 'none';
-  document.getElementById('profile').style.display = 'block';
-  document.getElementById('swipe-buttons').style.display = 'flex';
-  showUser(currentIndex);
-}
-
-function showSettings() {
-  alert("Settings Page (Coming Soon)");
-}
-
-document.getElementById('signupForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  loggedIn = true;
-  showSwipe();
-});
-
-</script>
+  <script src="script.js"></script>
 
 </body>
 </html>
