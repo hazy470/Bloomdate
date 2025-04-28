@@ -2,60 +2,68 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>BloomDate</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <header class="header">
-    <h1>BloomDate <span class="flower">✿</span></h1>
-  </header>
-
-  <main id="main-content">
-    <section id="home-page" class="page active">
-      <h2>Welcome to BloomDate!</h2>
-      <p>Find your match today!</p>
-      <button onclick="goToPage('swipe-page')">Start Swiping</button>
-    </section>
-
-    <section id="swipe-page" class="page">
-      <h2>Swipe Profiles</h2>
-      <div id="profile-card">
-        <h3 id="profile-name">Loading...</h3>
-        <p id="profile-info"></p>
-        <div class="swipe-buttons">
-          <button class="dislike" onclick="dislike()">❌</button>
-          <button class="like" onclick="like()">❤️</button>
-        </div>
-      </div>
-    </section>
-
-    <section id="messages-page" class="page">
-      <h2>Messages</h2>
-      <p>No messages yet...</p>
-    </section>
-
-    <section id="settings-page" class="page">
-      <h2>Settings</h2>
-      <form>
-        <label>Username:</label><br>
-        <input type="text" placeholder="Your username"><br><br>
-        <label>Interests:</label><br>
-        <input type="text" placeholder="Your interests"><br><br>
-        <button type="submit">Save</button>
-      </form>
-    </section>
-  </main>
-
-  <nav class="bottom-menu">
-    <button onclick="goToPage('home-page')">🏠<br>Home</button>
-    <button onclick="goToPage('swipe-page')">❤️<br>Swipe</button>
-    <button onclick="goToPage('messages-page')">💬<br>Messages</button>
-    <button onclick="goToPage('settings-page')">⚙️<br>Settings</button>
+  <!-- Navigation Menu -->
+  <nav class="bottom-nav">
+    <button onclick="showPage('home')">Home</button>
+    <button onclick="showPage('swipe')">Swipe</button>
+    <button onclick="showPage('messages')">Messages</button>
+    <button onclick="showPage('settings')">Settings</button>
   </nav>
 
-  <script src="script.js"></script>
+  <!-- Pages -->
+  <section id="home" class="page active">
+    <h1>Welcome to BloomDate</h1>
+    <button onclick="showPage('signup')">Sign Up</button>
+    <button onclick="showPage('login')">Log In</button>
+  </section>
 
+  <section id="signup" class="page">
+    <h2>Sign Up</h2>
+    <form onsubmit="signup(event)">
+      <input type="text" id="signupName" placeholder="Name" required><br>
+      <input type="number" id="signupAge" placeholder="Age" required><br>
+      <input type="email" id="signupEmail" placeholder="Email" required><br>
+      <input type="password" id="signupPassword" placeholder="Password" required><br>
+      <input type="text" id="signupInterests" placeholder="Interests" required><br>
+      <button type="submit">Create Account</button>
+    </form>
+  </section>
+
+  <section id="login" class="page">
+    <h2>Log In</h2>
+    <form onsubmit="login(event)">
+      <input type="email" id="loginEmail" placeholder="Email" required><br>
+      <input type="password" id="loginPassword" placeholder="Password" required><br>
+      <button type="submit">Log In</button>
+    </form>
+  </section>
+
+  <section id="swipe" class="page">
+    <h2>Find Your Match</h2>
+    <div id="card-container"></div>
+    <div class="swipe-buttons">
+      <button onclick="dislike()">Dislike</button>
+      <button onclick="like()">Like</button>
+    </div>
+  </section>
+
+  <section id="messages" class="page">
+    <h2>Messages</h2>
+    <p>Chat with your matches here!</p>
+  </section>
+
+  <section id="settings" class="page">
+    <h2>Settings</h2>
+    <p>Update your info or logout</p>
+    <button onclick="logout()">Logout</button>
+  </section>
+
+  <script src="script.js"></script>
 </body>
 </html>
