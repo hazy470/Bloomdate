@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Settings - BloomDate</title>
+  <style>
+    body { background: #1e1e1e; color: #fff; font-family: sans-serif; margin: 0; padding: 2rem; }
+    h1 { color: #ff69b4; text-align: center; }
+    .setting {
+      background: #2a2a2a;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-radius: 10px;
+    }
+    nav { position: fixed; bottom: 0; width: 100%; background: #2a2a2a; display: flex; justify-content: space-around; padding: 0.75rem 0; }
+    nav a { color: #ccc; text-decoration: none; }
+    nav a.active, nav a:hover { color: #ff69b4; }
+  </style>
+</head>
+<body>
+  <h1>Settings</h1>
+  <div class="setting">Change password</div>
+  <div class="setting">Notification preferences</div>
+  <div class="setting">Logout</div>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/swipe">Swipe</a>
+    <a href="/messages">Messages</a>
+    <a href="/settings" class="active">Settings</a>
+  </nav>
+</body>
+</html>
