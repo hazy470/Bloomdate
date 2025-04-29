@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Swipe - BloomDate</title>
+  <style>
+    body { background: #1e1e1e; color: #fff; font-family: sans-serif; margin: 0; padding: 2rem; }
+    h1 { color: #ff69b4; text-align: center; }
+    .profile-card {
+      background: #2a2a2a;
+      padding: 1rem;
+      border-radius: 10px;
+      margin: 1rem auto;
+      max-width: 300px;
+      text-align: center;
+    }
+    .profile-card img { width: 100%; border-radius: 10px; }
+    .btns button {
+      margin: 1rem 0.5rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+      background-color: #ff69b4;
+      cursor: pointer;
+    }
+    nav { position: fixed; bottom: 0; width: 100%; background: #2a2a2a; display: flex; justify-content: space-around; padding: 0.75rem 0; }
+    nav a { color: #ccc; text-decoration: none; }
+    nav a.active, nav a:hover { color: #ff69b4; }
+  </style>
+</head>
+<body>
+  <h1>Discover Matches</h1>
+  <div class="profile-card">
+    <img src="https://placekitten.com/300/200" alt="User">
+    <h2>Jane, 26</h2>
+    <p>Loves books, hiking, and stargazing</p>
+    <div class="btns">
+      <button>Like</button>
+      <button>Pass</button>
+    </div>
+  </div>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/swipe" class="active">Swipe</a>
+    <a href="/messages">Messages</a>
+    <a href="/settings">Settings</a>
+  </nav>
+</body>
+</html>
