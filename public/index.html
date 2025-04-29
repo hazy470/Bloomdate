@@ -1,69 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BloomDate</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background-color: #1e1e1e;
+      color: #fff;
+    }
+    header {
+      text-align: center;
+      padding: 2rem;
+      background-color: #2a2a2a;
+    }
+    header h1 {
+      margin: 0;
+      color: #ff69b4;
+    }
+    .content {
+      padding: 2rem;
+      text-align: center;
+    }
+    .content p {
+      font-size: 1.1rem;
+      color: #ccc;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      margin-top: 1.5rem;
+      background-color: #ff69b4;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+    nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #2a2a2a;
+      display: flex;
+      justify-content: space-around;
+      padding: 0.75rem 0;
+    }
+    nav a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    nav a.active, nav a:hover {
+      color: #ff69b4;
+    }
+  </style>
 </head>
 <body>
-
-  <!-- Navigation Menu -->
-  <nav class="bottom-nav">
-    <button onclick="showPage('home')">Home</button>
-    <button onclick="showPage('swipe')">Swipe</button>
-    <button onclick="showPage('messages')">Messages</button>
-    <button onclick="showPage('settings')">Settings</button>
+  <header><h1>BloomDate</h1></header>
+  <div class="content">
+    <p>Welcome to the dating app where love blossoms.</p>
+    <a class="btn" href="/signup">Get Started</a>
+  </div>
+  <nav>
+    <a href="/" class="active">Home</a>
+    <a href="/swipe">Swipe</a>
+    <a href="/messages">Messages</a>
+    <a href="/settings">Settings</a>
   </nav>
-
-  <!-- Pages -->
-  <section id="home" class="page active">
-    <h1>Welcome to BloomDate</h1>
-    <button onclick="showPage('signup')">Sign Up</button>
-    <button onclick="showPage('login')">Log In</button>
-  </section>
-
-  <section id="signup" class="page">
-    <h2>Sign Up</h2>
-    <form onsubmit="signup(event)">
-      <input type="text" id="signupName" placeholder="Name" required><br>
-      <input type="number" id="signupAge" placeholder="Age" required><br>
-      <input type="email" id="signupEmail" placeholder="Email" required><br>
-      <input type="password" id="signupPassword" placeholder="Password" required><br>
-      <input type="text" id="signupInterests" placeholder="Interests" required><br>
-      <button type="submit">Create Account</button>
-    </form>
-  </section>
-
-  <section id="login" class="page">
-    <h2>Log In</h2>
-    <form onsubmit="login(event)">
-      <input type="email" id="loginEmail" placeholder="Email" required><br>
-      <input type="password" id="loginPassword" placeholder="Password" required><br>
-      <button type="submit">Log In</button>
-    </form>
-  </section>
-
-  <section id="swipe" class="page">
-    <h2>Find Your Match</h2>
-    <div id="card-container"></div>
-    <div class="swipe-buttons">
-      <button onclick="dislike()">Dislike</button>
-      <button onclick="like()">Like</button>
-    </div>
-  </section>
-
-  <section id="messages" class="page">
-    <h2>Messages</h2>
-    <p>Chat with your matches here!</p>
-  </section>
-
-  <section id="settings" class="page">
-    <h2>Settings</h2>
-    <p>Update your info or logout</p>
-    <button onclick="logout()">Logout</button>
-  </section>
-
-  <script src="script.js"></script>
 </body>
 </html>
